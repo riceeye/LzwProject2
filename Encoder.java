@@ -7,32 +7,9 @@ public class Encoder {
 
 	//dont talk about it 
 	public Encoder(){
-		arr.add("a");
-		arr.add("b");
-		arr.add("c");
-		arr.add("d");
-		arr.add("e");
-		arr.add("f");
-		arr.add("g");
-		arr.add("h");
-		arr.add("i");
-		arr.add("j");
-		arr.add("k");
-		arr.add("l");
-		arr.add("m");
-		arr.add("n");
-		arr.add("o");
-		arr.add("p");
-		arr.add("q");
-		arr.add("r");
-		arr.add("s");
-		arr.add("t");
-		arr.add("u");
-		arr.add("v");
-		arr.add("w");
-		arr.add("x");
-		arr.add("y");
-		arr.add("z");
+		for (int i = 0; i < 128; i++) {
+			arr.add(""+(char)i);
+		}
 	}
 
 	public void encodeText(String fileName) throws IOException{

@@ -19,7 +19,7 @@ public class Encoder {
 			character = (char)(br.read());
 			file.add(character);
 		}
-		BufferedWriter writer = new BufferedWriter(new FileWriter (new File ("file.lzw")));
+		BufferedWriter writer = new BufferedWriter(new FileWriter (new File (fileName + ".lzw")));
 		//Declare temp variables
 		String encoded = "";
 		String temp = "";

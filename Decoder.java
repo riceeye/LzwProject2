@@ -6,11 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LZWDecoder {
+public class Decoder {
 	//make table that has the list of string and their value
 	private ArrayList<String> table = new ArrayList<String>(); 
 	
-	public LZWDecoder ()
+	public Decoder ()
 	{
 	}
 	
@@ -19,7 +19,7 @@ public class LZWDecoder {
 	{
 		try {
 		//make printwriter so we can print as we encode
-		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + "encoded"));
+		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + "decoded"));
 		Scanner reader = new Scanner (new File(fileName));
 		
 		for (int i=0; i<=127; i++)
@@ -32,8 +32,9 @@ public class LZWDecoder {
 		pw.print(table.get(code1));
 		int w = code1;
 		
-		while (reader.hasNext())
+		while (reader.hasNext()==true)
 		{
+			
 			code1 = reader.nextInt();
 			if (code1 <= 127) // if code read in is in dictionary
 			{

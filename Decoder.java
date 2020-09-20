@@ -15,7 +15,7 @@ public class Decoder {
 	}
 	
 		
-	public void decodeText(String fileName) throws FileNotFoundException
+	public void decodeText(String fileName) throws IOException
 	{
 		try {
 		//make printwriter so we can print as we encode
@@ -26,29 +26,30 @@ public class Decoder {
 		{
 			table.add(""+(char)(i)); //inputs values into table that are already in the ascii table; began at 33rd character to avoid weird chars
 		}
-		int code1=0;
-		code1 = reader.nextInt();
+
+		
+		int code1 = reader.nextInt();
 		
 		pw.print(table.get(code1));
-		int w = code1;
+		int beginning = code1;
 		
 		while (reader.hasNext()==true)
 		{
 			
 			code1 = reader.nextInt();
-			if (code1 <= 127) // if code read in is in dictionary
+			if (code1 <table.size()) // if code read in is in dictionary
 			{
 				String entry = table.get(code1);
 				pw.print(entry);
-				table.add(table.get(w) + entry.charAt(0) + "");
-				w = table.indexOf(entry);
+				table.add(table.get(beginning) + entry.charAt(0) + "");
+				beginning = table.indexOf(entry);
 			}
 			else //if code is not in dictionary
 			{
 				
-				pw.print(table.get(w) + table.get(w).charAt(0)+ "");
-				table.add(table.get(w) + table.get(w).charAt(0)+ "");
-				w=table.indexOf(table.get(w) + table.get(w).charAt(0)+ "");
+				pw.print(table.get(beginning) + table.get(beginning).charAt(0)+ "");
+				table.add(table.get(beginning) + table.get(beginning).charAt(0)+ "");
+				beginning=table.indexOf(table.get(beginning) + table.get(beginning).charAt(0)+ "");
 			}
 		}
 		

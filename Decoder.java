@@ -28,18 +28,18 @@ public class Decoder {
 		}
 
 		
-		int code1 = reader.nextInt();
+		int readIn = reader.nextInt();
 		
-		pw.print(table.get(code1));
-		int beginning = code1;
+		pw.print(table.get(readIn));
+		int beginning = readIn;
 		
 		while (reader.hasNext()==true)
 		{
 			
-			code1 = reader.nextInt();
-			if (code1 <table.size()) // if code read in is in dictionary
+			readIn = reader.nextInt();
+			if (readIn <table.size()) // if code read in is in dictionary
 			{
-				String entry = table.get(code1);
+				String entry = table.get(readIn);
 				pw.print(entry);
 				table.add(table.get(beginning) + entry.charAt(0) + "");
 				beginning = table.indexOf(entry);

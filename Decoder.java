@@ -12,6 +12,10 @@ public class Decoder {
 	
 	public Decoder ()
 	{
+		for (int i=0; i<=127; i++)
+		{
+			table.add(""+(char)(i)); 
+		}
 	}
 	
 	public void decodeText(String fileName) throws IOException
@@ -25,10 +29,7 @@ public class Decoder {
 		
 		
 		//inputs values into table that are already in the ascii table
-		for (int i=0; i<=127; i++)
-		{
-			table.add(""+(char)(i)); 
-		}
+		
 
 		//makes a string to hold the number (the numbers are separated by spaces, so this variable holds the number between them) and adds chars until the number/code is complete
 			String code = "";
@@ -46,7 +47,7 @@ public class Decoder {
 			
 			int num = Integer.parseInt(code);
 			int beginning = num; // beginning is the previous code
-]			if (table.contains(code)) // if code read in is in dictionary
+			if (table.contains(code)) // if code read in is in dictionary
 			{
 				String entry = table.get(num); // find value of new code and print
 				pw.print(entry); 

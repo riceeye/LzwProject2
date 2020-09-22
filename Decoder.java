@@ -23,39 +23,26 @@ public class Decoder {
 		try {
 		//make printwriter so we can print as we encode
 
-		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + "decoded"));
-		Scanner reader = new Scanner (new File(fileName));
+		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + ".decoded"));
+		BufferedReader br = new BufferedReader (new FileReader(fileName));
 
-		int readIn = reader.nextInt();
-		
+		int readIn = Integer.parseInt(br.readLine());
 		pw.print(table.get(readIn));
 		int beginning = readIn;
 
-		
 
-		//makes a string to hold the number (the numbers are separated by spaces, so this variable holds the number between them) and adds chars until the number/code is complete
-			String code = "";
-
-		pw.print(table.get(0)); // prints very first char
-		
 		
 		while (br.ready())
 		{
-			int i = br.read();
-			while (i != 32) {
-				code+=(""+ (char)i);
-				br.read();
-			}
-			
+		
 
-			readIn = reader.nextInt();
+			readIn = Integer.parseInt(br.readLine());
 			if (readIn <table.size()) // if code read in is in dictionary
 			{
 				String entry = table.get(readIn);
 				pw.print(entry);
 				table.add(table.get(beginning) + entry.charAt(0) + "");
 				beginning = table.indexOf(entry);
-
 			}
 			else //if code is not in dictionary
 			{

@@ -14,7 +14,7 @@ public class Decoder {
 	{
 		for (int i=0; i<=127; i++)
 		{
-			table.add(""+(char)(i)); 
+			table.add(""+(char)(i)); //inputs values into table that are already in the ascii table
 		}
 	}
 	
@@ -28,7 +28,7 @@ public class Decoder {
 		BufferedReader br = new BufferedReader (new FileReader(fileName));		
 		
 		
-		//inputs values into table that are already in the ascii table
+		
 		
 
 		//makes a string to hold the number (the numbers are separated by spaces, so this variable holds the number between them) and adds chars until the number/code is complete

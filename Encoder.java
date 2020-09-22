@@ -14,7 +14,7 @@ public class Encoder {
 	public void encodeText(String fileName) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader(fileName)); 
 		PrintWriter pw = new PrintWriter (new FileWriter (new File (fileName +".lzw")));
-		String code = "" + (char)br.read();
+		String code = "";
 		
 		while (br.ready()) {
 			String last = "" + (char)(br.read());

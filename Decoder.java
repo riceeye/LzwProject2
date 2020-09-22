@@ -46,7 +46,7 @@ public class Decoder {
 			}
 			else //if code is not in dictionary
 			{
-				newEntry = table.get(beginning) + table.get(beginning).charAt(0)+ ""
+				newEntry = table.get(beginning) + table.get(beginning).charAt(0)+ "");
 				pw.print(newEntry);
 				table.add(newEntry);
 				beginning=table.indexOf(newEntry);

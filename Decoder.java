@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 public class Decoder {
 	//make table that has the list of strings and their value
 	private HashMap<Integer, String> table = new HashMap<Integer, String>(); 
-	
+
 	public Decoder ()
 	{
 		for (int i=0; i<=127; i++)
@@ -18,27 +18,23 @@ public class Decoder {
 			table.put(i, ""+(char)(i)); //inputs values into table that are already in the ascii table
 		}
 	}
-	
+
 	public void decodeText(String fileName) throws IOException
 	{
-		try {
 		//make printwriter so we can print as we encode
-
 		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + ".decoded"));
 
 		Scanner scan = new Scanner (new File (fileName));
-		
+
 		int readIn = scan.nextInt();
 		pw.print(table.get(readIn));
 		int beginning = readIn;
-		String beg = "";
+		String beg = table.get(readIn);
 
 		String newEntry = "";
-		
+
 		while (scan.hasNext())
 		{
-		
-
 			readIn = scan.nextInt();
 			if (table.containsKey(readIn)) // if code read in is in dictionary
 			{
@@ -49,19 +45,13 @@ public class Decoder {
 			}
 			else //if code is not in dictionary
 			{
-				newEntry = (table.get(beginning) + table.get(beginning).charAt(0)+ "");
+				newEntry = (beg + beg.charAt(0)+ "");
 				pw.print(newEntry);
 				table.put(table.size(), newEntry);
 				beg=newEntry + "";
 			}
 		}
-		
-		
+		scan.close();
+		pw.close();		
 	}
-	catch (IOException e)
-	{
-		System.out.println("error");
-	}
-
-}
 }

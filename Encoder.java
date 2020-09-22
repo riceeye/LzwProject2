@@ -20,14 +20,21 @@ public class Encoder {
 			String last = "" + (char)(br.read());
 			String pattern = "" + code + last;
 			
-			if (map.containsKey(pattern)) {
+			if (map.containsKey(pattern) || pattern.length()==1) {
 				code = pattern;
 			}
 					
 			else {
-				map.put(pattern, mapSize++);
+				if (code.length()==1)
+				{
+					pw.print(pattern.charAt(0))
+				}
+				else
+				{
+				pw.print(map.get(last);
+				}
 			}
-			pw.print(map.get(code) + " ");
+			
 			code = last;
 		}
 		

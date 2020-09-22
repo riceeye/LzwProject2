@@ -1,7 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -28,7 +26,6 @@ public class Decoder {
 
 		int readIn = scan.nextInt();
 		pw.print(table.get(readIn));
-		int beginning = readIn;
 		String beg = table.get(readIn);
 
 		String newEntry = "";

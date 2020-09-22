@@ -14,7 +14,7 @@ public class Decoder {
 	{
 		for (int i=0; i<=127; i++)
 		{
-			table.add(""+(char)(i)); 
+			table.add(""+(char)(i)); //inputs values into table that are already in the ascii table
 		}
 	}
 	
@@ -22,13 +22,15 @@ public class Decoder {
 	{
 		try {
 		//make printwriter so we can print as we encode
-		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + ".decoded"));
+
+		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + "decoded"));
+		Scanner reader = new Scanner (new File(fileName));
+
+		int readIn = reader.nextInt();
 		
-		//Scanner reader = new Scanner (new File(fileName)); replaced with a buffered reader
-		BufferedReader br = new BufferedReader (new FileReader(fileName));		
-		
-		
-		//inputs values into table that are already in the ascii table
+		pw.print(table.get(readIn));
+		int beginning = readIn;
+
 		
 
 		//makes a string to hold the number (the numbers are separated by spaces, so this variable holds the number between them) and adds chars until the number/code is complete
@@ -45,21 +47,22 @@ public class Decoder {
 				br.read();
 			}
 			
-			int num = Integer.parseInt(code);
-			int beginning = num; // beginning is the previous code
-			if (table.contains(code)) // if code read in is in dictionary
+
+			readIn = reader.nextInt();
+			if (readIn <table.size()) // if code read in is in dictionary
 			{
-				String entry = table.get(num); // find value of new code and print
-				pw.print(entry); 
-				table.add(table.get(beginning) + entry.charAt(0) + ""); // add to table the char of the last code + first letter of current code
-				beginning = table.indexOf(entry); // current code becomes previous
+				String entry = table.get(readIn);
+				pw.print(entry);
+				table.add(table.get(beginning) + entry.charAt(0) + "");
+				beginning = table.indexOf(entry);
+
 			}
 			else //if code is not in dictionary
 			{
 				
-				pw.print(table.get(beginning) + table.get(beginning).charAt(0)+ ""); // print the value or chars of previous code + first letter of new code
-				table.add(table.get(beginning) + table.get(beginning).charAt(0)+ "");// add what you printed to table
-				beginning=table.indexOf(table.get(beginning) + table.get(beginning).charAt(0)+ ""); // this printed value becomes the previous code
+				pw.print(table.get(beginning) + table.get(beginning).charAt(0)+ "");
+				table.add(table.get(beginning) + table.get(beginning).charAt(0)+ "");
+				beginning=table.indexOf(table.get(beginning) + table.get(beginning).charAt(0)+ "");
 			}
 		}
 		

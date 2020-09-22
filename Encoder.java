@@ -31,6 +31,14 @@ public class Encoder {
 			}
 			
 		}
+		if (prefix.length() == 1)
+		{
+			pw.print(last.charAt(0));
+		}
+		else
+		{
+			pw.print(map.get(last));
+		}
 		
 		br.close();
 		pw.close();

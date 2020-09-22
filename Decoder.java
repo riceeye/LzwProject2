@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashMap;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -8,13 +8,13 @@ import java.io.PrintWriter;
 
 public class Decoder {
 	//make table that has the list of strings and their value
-	private ArrayList<String> table = new ArrayList<String>(); 
+	private HashMap<Integer, String> table = new HashMap<Integer, String>(); 
 	
 	public Decoder ()
 	{
 		for (int i=0; i<=127; i++)
 		{
-			table.add(""+(char)(i)); //inputs values into table that are already in the ascii table
+			table.put(i, ""+(char)(i)); //inputs values into table that are already in the ascii table
 		}
 	}
 	
@@ -24,32 +24,34 @@ public class Decoder {
 		//make printwriter so we can print as we encode
 
 		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + ".decoded"));
-		BufferedReader br = new BufferedReader (new FileReader(fileName));
 
-		int readIn = Integer.parseInt(br.readLine());
+		Scanner scan = new Scanner (new Filereader (fileName))
+		
+		int readIn = scan.nextInt();
 		pw.print(table.get(readIn));
 		int beginning = readIn;
+		String beg = "";
 
-
+		String newEntry = "";
 		
-		while (br.ready())
+		while (scan.hasNext())
 		{
 		
 
-			readIn = Integer.parseInt(br.readLine());
-			if (readIn <table.size()) // if code read in is in dictionary
+			readIn = scan.getNextInt();
+			if (table.containsKey(readIn)) // if code read in is in dictionary
 			{
 				String entry = table.get(readIn);
 				pw.print(entry);
-				table.add(table.get(beginning) + entry.charAt(0) + "");
-				beginning = table.indexOf(entry);
+				table.put(table.size(), beg + entry.charAt(0) + "");
+				beg = entry;
 			}
 			else //if code is not in dictionary
 			{
 				newEntry = table.get(beginning) + table.get(beginning).charAt(0)+ "");
 				pw.print(newEntry);
-				table.add(newEntry);
-				beginning=table.indexOf(newEntry);
+				table.put(table.size(), newEntry);
+				beginning=newEntry;
 			}
 		}
 		

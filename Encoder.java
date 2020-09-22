@@ -17,33 +17,19 @@ public class Encoder {
 		String code = "";
 		
 		while (br.ready()) {
-			String last = "" + (char)(br.read());
-			String pattern = "" + code + last;
+			String c = "" + (char)(br.read()); //reads in new char as variable 'c'
+			String newcode = "" + code + c; //appends c onto code
 			
-			if (map.containsKey(pattern) || pattern.length()==1) {
-				code = pattern;
+			if (map.containsKey(newcode)) {
+				code = newcode;
 			}
 					
 			else {
-				if (code.length()==1)
-				{
-					pw.print(pattern.charAt(0))
-				}
-				else
-				{
-				pw.print(map.get(last);
-				}
+				pw.print(map.get(code) + " ");
+				map.put(newcode, mapSize++);
+				code = c;
 			}
 			
-			code = last;
-		}
-		if (prefix.length() == 1)
-		{
-			pw.print(last.charAt(0));
-		}
-		else
-		{
-			pw.print(map.get(last));
 		}
 		
 		br.close();

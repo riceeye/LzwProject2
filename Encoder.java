@@ -29,9 +29,8 @@ public class Encoder {
 				map.put(newcode, mapSize++);
 				code = c;
 			}
-			
 		}
-		
+		pw.print(map.get(code) + " ");
 		br.close();
 		pw.close();
 	}

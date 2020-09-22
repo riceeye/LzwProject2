@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 import java.io.PrintWriter;
 
 public class Decoder {
@@ -25,7 +26,7 @@ public class Decoder {
 
 		PrintWriter pw = new PrintWriter(new FileWriter(fileName  + ".decoded"));
 
-		Scanner scan = new Scanner (new Filereader (fileName))
+		Scanner scan = new Scanner (new File (fileName));
 		
 		int readIn = scan.nextInt();
 		pw.print(table.get(readIn));
@@ -38,7 +39,7 @@ public class Decoder {
 		{
 		
 
-			readIn = scan.getNextInt();
+			readIn = scan.nextInt();
 			if (table.containsKey(readIn)) // if code read in is in dictionary
 			{
 				String entry = table.get(readIn);

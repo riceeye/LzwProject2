@@ -5,8 +5,8 @@ public class Tester {
 		Encoder encoded = new Encoder ();
 		encoded.encodeText("big.txt");
 		
-		Decoder decoded = new Decoder();
-		decoded.decodeText("big.txt.lzw");
+		//Decoder decoded = new Decoder();
+		//decoded.decodeText("big.txt.lzw");
 		
 	}
 }

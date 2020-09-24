@@ -31,7 +31,6 @@ public class Decoder {
 		int readIn = (int)scan.read(); // takes in the very beginning of the code, variable readIn represents what's just been read in from code	
 		pw.print(table.get(readIn)); // printing first string 
 		String pastEntry = table.get(readIn); // update the past entry with the current
-
 		String specialEntry = ""; // used for when the code is not in the dictionary
 
 		while (scan.ready())

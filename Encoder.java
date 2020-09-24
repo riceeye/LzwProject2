@@ -4,6 +4,7 @@ import java.io.*;
 public class Encoder {
 	HashMap <String, Integer> map = new HashMap<String,Integer>();
 	int mapSize = 128;
+	int maxSize = 4096;
 	public Encoder(){
 		//initializes the array with 0-127 from ascii table
 		for (int i = 0; i < 128; i++) {
@@ -25,12 +26,17 @@ public class Encoder {
 			}
 					
 			else {
-				pw.print(map.get(code) + " ");
-				map.put(newcode, mapSize++);
+				pw.print((char)(int)map.get(code));
+				if(mapSize < maxSize) {
+					map.put(newcode, mapSize++);
+				}
+				else {
+					// ???
+				}
 				code = c;
 			}
 		}
-		pw.print(map.get(code) + " ");
+		pw.print((char)(int)map.get(code));
 		br.close();
 		pw.close();
 	}

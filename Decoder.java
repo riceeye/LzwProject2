@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -9,6 +10,8 @@ public class Decoder {
 	//make table that has the list of strings and their value
 	private HashMap<Integer, String> table = new HashMap<Integer, String>(); 
 	int maxSize = 4096;
+	ArrayDeque<Integer> recency = new ArrayDeque<Integer>();
+	int[] freq = new int[maxSize];
 	public Decoder ()
 	{
 		for (int i=0; i<=127; i++)
@@ -25,7 +28,7 @@ public class Decoder {
 		//make scanner to scan in code
 		BufferedReader scan = new BufferedReader (new FileReader (fileName));
 
-		int readIn = (int)scan.read(); // takes in the very beginning of the code, variable readIn represents what's just been read in from code
+		int readIn = (int)scan.read(); // takes in the very beginning of the code, variable readIn represents what's just been read in from code	
 		pw.print(table.get(readIn)); // printing first string 
 		String pastEntry = table.get(readIn); // update the past entry with the current
 
@@ -38,6 +41,7 @@ public class Decoder {
 			{
 				String currentEntry = table.get(readIn); // string value of most recent code
 				pw.print(currentEntry); 
+				
 				if(table.size() < maxSize) {
 					table.put(table.size(), pastEntry + currentEntry.charAt(0) + ""); // add to end of table the previous string and the first char of current code
 				}

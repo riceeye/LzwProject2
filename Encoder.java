@@ -6,7 +6,7 @@ public class Encoder {
 	int mapSize = 128;
 	int maxSize = 4096;
 	ArrayDeque<Integer> recency = new ArrayDeque<Integer>();
-	int[] freq = new int[4096];
+	int[] freq = new int[maxSize];
 	public Encoder(){
 		//initializes the array with 0-127 from ascii table
 		for (int i = 0; i < 128; i++) {

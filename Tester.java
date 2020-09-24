@@ -7,6 +7,5 @@ public class Tester {
 		
 		//Decoder decoded = new Decoder();
 		//decoded.decodeText("big.txt.lzw");
-		
 	}
 }

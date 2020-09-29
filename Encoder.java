@@ -32,7 +32,7 @@ public class Encoder {
 				pw.print((char)(int)map.get(code));
 				
 				if(mapSize < maxSize) { // check if map is full yet
-					map.put(newcode, mapSize++);	
+					map.put(newcode, mapSize++);
 				}
 				else {
 					String remove = recency.removeLast(); // get oldest string

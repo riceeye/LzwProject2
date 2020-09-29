@@ -3,14 +3,15 @@ import java.io.*;
 
 public class Encoder {
 	HashMap <String, Integer> map = new HashMap<String,Integer>();
-	int mapSize = 128;
+	int mapSize = 256;
 	int maxSize = 4096;
-	ArrayDeque<Integer> recency = new ArrayDeque<Integer>();
-	int[] freq = new int[maxSize];
+	LinkedList<String> recency = new LinkedList<String>();
+	
 	public Encoder(){
 		//initializes the array with 0-127 from ascii table
-		for (int i = 0; i < 128; i++) {
+		for (int i = 0; i < 256; i++) {
 			map.put("" + (char)i, i);
+			recency.addFirst(""+(char)i); // add starting hashmap to linkedlist
 		}
 	}
 
@@ -30,22 +31,25 @@ public class Encoder {
 			else {
 				pw.print((char)(int)map.get(code));
 				
-				recency.add((int)map.get(code)); // add int to queue tracking recency
-				freq[(int)map.get(code)]++; // add one to the frequency of the code in the queue
-				
 				if(mapSize < maxSize) { // check if map is full yet
-					map.put(newcode, mapSize++);
+					map.put(newcode, mapSize++);	
 				}
 				else {
-					int least = recency.poll(); // take first int from queue
-					while(freq[least] != 1) { // check if it's the most recent iteration of that int
-						freq[least]--; // if not, remove from queue and subtract from frequency
-						least = recency.poll(); // get next int from queue to check
+					String remove = recency.removeLast(); // get oldest string
+					System.out.println(remove);
+					int replace = map.get(remove); // get code for that string 
+					while(replace < 256) {
+						remove = recency.removeLast(); // get oldest string
+						replace = map.get(remove); // get code for that string 
 					}
-					map.put(newcode, least); // if yes, replace that code with new one
-					freq[least] = 0; // set frequency for the new code to 0 since it hasn't been used yet
+					map.remove(remove);
+					map.put(newcode, replace); // replace old key-value pair with new one
 				}
-				code = c;
+				
+				recency.remove(code); // move code to front of list, add newcode to list
+				recency.addFirst(code);
+				recency.addFirst(newcode);
+				code = c; // reset string
 			}
 		}
 		pw.print((char)(int)map.get(code));

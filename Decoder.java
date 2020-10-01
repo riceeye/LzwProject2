@@ -14,7 +14,7 @@ public class Decoder {
 	int[] freq = new int[maxSize];
 	public Decoder ()
 	{
-		for (int i=0; i<=127; i++)
+		for (int i=0; i<128; i++)
 		{
 			table.put(i, ""+(char)(i)); //inputs values into table that are already in the ascii table
 		}
